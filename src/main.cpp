@@ -32,6 +32,10 @@ int main(){
     window.setFramerateLimit(240);
     window.setSize(Vector2u(900, 900));
     window.setPosition(Vector2i(VideoMode::getDesktopMode().width/2 - window.getSize().x/2, VideoMode::getDesktopMode().height/2 - window.getSize().y/2));
+    View viewPort;
+    viewPort.setSize(wSize.x, wSize.y);
+    viewPort.setCenter(wSize.x/2, wSize.y/2);
+
 
     FPS fps;
     Clock dtClock;
@@ -51,10 +55,10 @@ int main(){
             if (event.type == sf::Event::Closed)
                 window.close();
             if (event.type == sf::Event::Resized)
-                ResizedWindow(window, cam.view);
+                ResizedWindow(window, viewPort);
         }
 
-        window.setView(cam.view);
+        window.setView(viewPort);
         window.clear();
 
         window.display();
