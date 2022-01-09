@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
-set(PROJECT_NAME Game)
+set(PROJECT_NAME TemplateName)
 project(${PROJECT_NAME} VERSION 1.0.0 LANGUAGES CXX)
 find_package(OpenGL)
 
@@ -20,14 +20,14 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 find_package(SFML 2 REQUIRED COMPONENTS audio graphics window system)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
-target_include_directories(${PROJECT_NAME} PRIVATE "include" "lib")
+target_include_directories(${PROJECT_NAME} PRIVATE "include" "lib" "res")
 target_link_libraries(${PROJECT_NAME} sfml-system sfml-window sfml-graphics sfml-audio)
 if (UNIX)
    target_link_libraries(${PROJECT_NAME} pthread)
 endif (UNIX)
 
 # Copy data dir to the binary directory
-#file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/data DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/res" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 if(MSVC)
    foreach(lib ${SFML_LIBS})
