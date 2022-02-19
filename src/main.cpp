@@ -6,7 +6,7 @@ using namespace sf;
 
 int main()
 {
-    RenderWindow window(VideoMode(900, 750), "Sfml Template");
+    RenderWindow window(VideoMode(900, 750), "Template");
 
     while (window.isOpen()){
         sf::Event event;

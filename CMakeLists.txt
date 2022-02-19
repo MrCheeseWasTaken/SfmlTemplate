@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
-set(PROJECT_NAME TemplateName)
+set(PROJECT_NAME Template)
 project(${PROJECT_NAME} VERSION 1.0.0 LANGUAGES CXX)
 find_package(OpenGL)
 
@@ -27,6 +27,10 @@ if (UNIX)
 endif (UNIX)
 
 # Copy data dir to the binary directory
+if (IS_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/res")
+   message("-- deleting res\n")
+   file(REMOVE_RECURSE "${CMAKE_CURRENT_BINARY_DIR}/res")
+endif()
 file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/res" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 if(MSVC)
