@@ -7,14 +7,16 @@ if(NOT CMAKE_BUILD_TYPE)
    set(CMAKE_BUILD_TYPE Release)
 endif()
 
-file(GLOB source_files
-	"src/*.cpp"
+file(GLOB_RECURSE source_files
+   src/*.cpp
+   src/*.hpp
+   src/**/*.cpp
+   src/**/*.hpp
 )
 
-set(SOURCES ${source_files})
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(${PROJECT_NAME} ${SOURCES})
+add_executable(${PROJECT_NAME} ${source_files})
 target_include_directories(${PROJECT_NAME} PRIVATE "include" "lib" "res" "src")
 target_link_libraries(${PROJECT_NAME}
    ${CMAKE_SOURCE_DIR}/lib/libsfml-system.a
@@ -30,10 +32,3 @@ endif (UNIX)
 
 # Copy data dir to the binary directory
 file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/res" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-
-if(MSVC)
-   foreach(lib ${SFML_LIBS})
-      get_target_property(lib_path ${lib} LOCATION)
-      file(COPY ${lib_path} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-   endforeach()
-endif(MSVC)
